@@ -17,7 +17,7 @@ public class SongLibrary {
 		addsong(new Song("Tada","Microsoft",  2, "songfiles/tada.wav"));
 		addsong(new Song("The Curtain Rises","Kevin MacLeod",  28, "songfiles/TheCurtainRises.mp3"));
 		addsong(new Song("Untameable Fire","Pierre Langer",  282, "songfiles/UntameableFire.mp3"));
-		addsong(new Song("StarStrukk","3OH!3",  184, "songfiles/stuff.mp3"));
+		addsong(new Song("stuff","3OH!3",  184, "songfiles/stuff.mp3"));
 	}
 
 	private void addsong(Song song) {

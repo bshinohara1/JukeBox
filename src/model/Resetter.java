@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class Resetter {
 	
-	LocalDateTime dates;
+	public LocalDateTime dates;
 	LocalDate cur;
 	UserDatabase users;
 	SongLibrary songs;
