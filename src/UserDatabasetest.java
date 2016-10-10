@@ -19,6 +19,7 @@ public class UserDatabasetest {
 		assertEquals(a.size(),4);
 		assertTrue(a.contain("Chris"));
 		assertTrue(a.validator("Chris", "1"));
+		assertFalse(a.validator("Chris", "11"));
 	}
 	@Test
 	public void test1() {
@@ -32,14 +33,18 @@ public class UserDatabasetest {
 		assertEquals(3,one.getCount());
 		assertEquals(checks.check(one, hold),1);
 		one.minusCount();
+		assertEquals(one.getCredits(),1500*60);
+		one.minusCredits(1000);
+		assertEquals(one.getCredits(),1500*60-1000);
 		assertEquals(2,one.getCount());
 		one.minusCount();
 		assertEquals(checks.check(one, hold),1);
 		one.minusCount();
 		assertEquals(checks.check(one, hold),-1);
 		assertTrue(b.contains("stuff"));
-		
 		assertEquals(hold.canbeplayed(),true);
+		assertEquals(hold.getname(),"stuff");
+		assertEquals(hold.getartist(),"3OH!3");
 		hold.play();
 		hold.play();
 		hold.play();
@@ -51,6 +56,9 @@ public class UserDatabasetest {
 		a.checkday();
 		assertEquals(3,one.getCount());
 		assertEquals(hold.canbeplayed(),true);
+		assertEquals(hold.getlocation(),"songfiles/stuff.mp3");
+		c.removeuser(c.getuser("Ryan"));
+		assertEquals(c.size(),3);
 	}
 
 }

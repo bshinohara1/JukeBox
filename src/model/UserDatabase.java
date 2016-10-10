@@ -23,11 +23,6 @@ public class UserDatabase {
 			database.put(newuser.username, newuser);
 	}
 	
-	public void reuser(User newuser) {
-		if (contain(newuser.username))
-			database.remove(newuser.username);
-	}
-	
 	public int size(){
 		return database.size();
 	}

@@ -12,7 +12,7 @@ public class SongLibrary {
 		addsong(new Song("Determined Tumbao","FreePlay Music",  20, "songfiles/DeterminedTumbao.mp3"));
 		addsong(new Song("Flute","Sun Microsystems",  5 , "songfiles/flute.aif"));
 		addsong(new Song("Loping Sting","Kevin MacLeod",  4, "songfiles/LopingSting.mp3"));
-		addsong(new Song("Space Music","Unknown",  6, "songfiles/spacemusinc.au"));
+		addsong(new Song("Space Music","Unknown",  6, "songfiles/spacemusic.au"));
 		addsong(new Song("Swing Cheese","FreePlay Music",  15, "songfiles/SwingCheese.mp3"));
 		addsong(new Song("Tada","Microsoft",  2, "songfiles/tada.wav"));
 		addsong(new Song("The Curtain Rises","Kevin MacLeod",  28, "songfiles/TheCurtainRises.mp3"));
