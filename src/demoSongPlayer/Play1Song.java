@@ -22,7 +22,7 @@ public class Play1Song {
 		// Construct an instance of the private inner class
 		EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 		
-		SongPlayer.playFile(waitForSongEnd, "./songfiles/TheCurtainRises.mp3");
+		SongPlayer.playFile(waitForSongEnd, "./songfiles/stuff.mp3");
 		
 		System.out.println("Song played in a separate Thread so this appears immediately");
 		System.out.println("This program will not terminate umtil the song finishes...");

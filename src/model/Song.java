@@ -8,13 +8,14 @@ public class Song {
 	int time;
 	int played;
 	String loc;
+	int maxplays =3;
 	
 	public Song(String name, String artist, int time, String location){
 		this.name=name;
 		this.artist=artist;
 		this.time=time;
 		loc = location;
-		played = 3;
+		played = maxplays;
 	}
 	
 	public String getname(){
@@ -38,7 +39,13 @@ public class Song {
 	}
 	
 	public void setplayed(){
-		played =3;
+		played =maxplays;
+	}
+	
+	public boolean canbeplayed(){
+		if(played ==0)
+			return false;
+		return true;
 	}
 
 }
