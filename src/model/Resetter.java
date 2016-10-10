@@ -1,14 +1,10 @@
+package model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
 
 import java.util.Iterator;
-
-import model.Song;
-import model.SongLibrary;
-import model.User;
-import model.UserDatabase;
 
 public class Resetter {
 	
