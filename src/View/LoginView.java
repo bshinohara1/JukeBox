@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.Checker;
@@ -40,7 +41,7 @@ public class LoginView extends JPanel{
 	private JLabel password;
 	private JLabel status;
 	private JTextField textEditorAcc;
-	private JTextField textEditorPass;
+	private JPasswordField textEditorPass;
 	private SongLibrary ourSongs;
 	private UserDatabase ourUsers;
 	private User curUser;
@@ -61,8 +62,8 @@ public class LoginView extends JPanel{
 		ourQueue = new LinkedList<Song>();
 		myRest = new Resetter(users, lib);
 		myCheck = new Checker();
-		firstSong = ourSongs.getSong("(Tada)");
-		secondSong = ourSongs.getSong("(Space Music)");
+		firstSong = ourSongs.getSong("Tada");
+		secondSong = ourSongs.getSong("Space Music");
 		initializeJTextAreaPanel();
 	}
 
@@ -74,7 +75,7 @@ public class LoginView extends JPanel{
 		accountName = new JLabel("Account Name");
 		password = new JLabel("Password");
 		textEditorAcc = new JTextField("", 50);
-		textEditorPass = new JTextField("", 50);
+		textEditorPass = new JPasswordField("", 50);
 		textAreaPanel.add(accountName);
 		accountName.setLocation(100, 10);
 		accountName.setSize(100, 30);
@@ -148,7 +149,7 @@ public class LoginView extends JPanel{
 		
 		private String format(int credits) {
 			int hours = credits/3600;
-			String sHours;
+			String sHours = new String("");
 			if (hours < 10) {
 				sHours = "0" + hours;
 			}
@@ -156,6 +157,7 @@ public class LoginView extends JPanel{
 				sHours = "" + hours;
 			}
 			int minutes = credits % 3600;
+			int minutesForS = minutes;
 			minutes = minutes / 60;
 			
 			String sMinutes;
@@ -165,9 +167,9 @@ public class LoginView extends JPanel{
 			else{
 				sMinutes = "" + minutes;
 			}
-			int sec = minutes % 60;
+			int sec = minutesForS % 60;
 			
-			String sSeconds;
+			String sSeconds = new String();
 			if (sec < 10) {
 				sSeconds = "0" + sec;
 			}
@@ -279,7 +281,7 @@ public class LoginView extends JPanel{
 
 		private String format(int credits) {
 			int hours = credits/3600;
-			String sHours;
+			String sHours = new String("");
 			if (hours < 10) {
 				sHours = "0" + hours;
 			}
@@ -287,6 +289,7 @@ public class LoginView extends JPanel{
 				sHours = "" + hours;
 			}
 			int minutes = credits % 3600;
+			int minutesForS = minutes;
 			minutes = minutes / 60;
 			
 			String sMinutes;
@@ -296,9 +299,9 @@ public class LoginView extends JPanel{
 			else{
 				sMinutes = "" + minutes;
 			}
-			int sec = minutes % 60;
+			int sec = minutesForS % 60;
 			
-			String sSeconds;
+			String sSeconds = new String();
 			if (sec < 10) {
 				sSeconds = "0" + sec;
 			}
