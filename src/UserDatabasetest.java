@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.SongLibrary;
 import model.UserDatabase;
 
 public class UserDatabasetest {
@@ -15,7 +16,9 @@ public class UserDatabasetest {
 	}
 	@Test
 	public void test1() {
-		Resetter a = new Resetter();
+		UserDatabase c = new UserDatabase();
+		SongLibrary b = new SongLibrary();
+		Resetter a = new Resetter(c,b);
 		
 	}
 

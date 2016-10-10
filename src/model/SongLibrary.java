@@ -41,6 +41,11 @@ public class SongLibrary {
 	public Song getSong(String songname){
 		return lib.get(songname);
 	}
+
+	public HashMap getlist() {
+		// TODO Auto-generated method stub
+		return lib;
+	}
 	
 	
 }

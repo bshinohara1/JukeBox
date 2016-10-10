@@ -32,7 +32,7 @@ public class User {
 		count--;
 	}
 	
-	public boolean valid(User me){
+	public boolean valid(){
 		if(count==0)
 			return false;
 		return true;

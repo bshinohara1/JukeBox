@@ -46,5 +46,10 @@ public class UserDatabase {
 	public User getuser(String loginname){
 		return database.get(loginname);
 	}
+
+	public HashMap getlist() {
+		// TODO Auto-generated method stub
+		return database;
+	}
 	
 }
