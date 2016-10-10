@@ -10,10 +10,10 @@ import model.UserDatabase;
 
 
 
-public class JukeBoxGui extends JFrame {
+public class JukeBoxStartGui extends JFrame {
 	
 	public static void main(String[] args) {
-		JukeBoxGui g = new JukeBoxGui();
+		JukeBoxStartGui g = new JukeBoxStartGui();
 		g.setVisible(true);
 	}
 	
@@ -24,7 +24,7 @@ public class JukeBoxGui extends JFrame {
 	private SongLibrary lib;
 	private UserDatabase users;
 
-	public JukeBoxGui() {
+	public JukeBoxStartGui() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(width, height);
 		this.setLocation(100, 40);
