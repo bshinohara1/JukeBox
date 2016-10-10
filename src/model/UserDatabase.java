@@ -33,7 +33,7 @@ public class UserDatabase {
 	}
 	
 	public boolean validator(String loginuser, String loginpass){
-			if(database.containsKey(loginuser)&& database.get(loginuser).equals(loginpass))
+			if(database.containsKey(loginuser) && database.get(loginuser).getpass().equals(loginpass))
 				return true;
 		return false;
 	}

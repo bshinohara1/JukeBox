@@ -41,5 +41,10 @@ public class User {
 	public void reset(){
 		count=maxplays;
 	}
+
+	public String getpass() {
+		// TODO Auto-generated method stub
+		return pass;
+	}
 	
 }
