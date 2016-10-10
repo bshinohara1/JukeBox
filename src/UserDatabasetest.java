@@ -13,6 +13,7 @@ import model.UserDatabase;
 
 public class UserDatabasetest {
 
+	//Tests that the userdatabase works.
 	@Test
 	public void test() {
 		UserDatabase a = new UserDatabase();
@@ -21,6 +22,9 @@ public class UserDatabasetest {
 		assertTrue(a.validator("Chris", "1"));
 		assertFalse(a.validator("Chris", "11"));
 	}
+	
+	//Goes over a series of tests including the checker and the reseter as well as the song library,
+	//song,user, and userdatabase to ensure that the code works as intended.
 	@Test
 	public void test1() {
 		UserDatabase c = new UserDatabase();
@@ -45,6 +49,7 @@ public class UserDatabasetest {
 		assertEquals(hold.canbeplayed(),true);
 		assertEquals(hold.getname(),"stuff");
 		assertEquals(hold.getartist(),"3OH!3");
+		assertEquals(hold.gettime(),184);
 		hold.play();
 		hold.play();
 		hold.play();

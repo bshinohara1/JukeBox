@@ -2,12 +2,23 @@ package model;
 
 import java.util.HashMap;
 
+/*
+ * This is a class that makes a list of songs and stores them in a hashmap in order to retrieve the 
+ * correct song.
+ */
 public class SongLibrary {
 
 	HashMap<String,Song> lib ;
 	
 	public SongLibrary(){
 		lib = new HashMap<String , Song>();
+		in();
+		
+	}
+
+	//adds the initial songs to the hashmap
+	private void in() {
+		// TODO Auto-generated method stub
 		addsong(new Song("Danse Macabre","Kevin MacLeod", 34, "songfiles/DanseMacabreViolinHook.mp3"));
 		addsong(new Song("Determined Tumbao","FreePlay Music",  20, "songfiles/DeterminedTumbao.mp3"));
 		addsong(new Song("Flute","Sun Microsystems",  5 , "songfiles/flute.aif"));
@@ -20,6 +31,7 @@ public class SongLibrary {
 		addsong(new Song("stuff","3OH!3",  184, "songfiles/stuff.mp3"));
 	}
 
+	//function that add a song to the hashmap if it isn't already in the list
 	private void addsong(Song song) {
 		// TODO Auto-generated method stub
 		if(!lib.containsKey(song.name)){
@@ -27,6 +39,7 @@ public class SongLibrary {
 		}
 	}
 	
+	//This will remove a song given the song name.
 	private void removesong(String songname) {
 		// TODO Auto-generated method stub
 		if(lib.containsKey(songname)){
@@ -34,15 +47,18 @@ public class SongLibrary {
 		}
 	}
 	
+	//Will return a boolean telling if the song is contained in the hashmap.
 	public boolean contains(String songname){
 		return lib.containsKey(songname);
 	}
 	
+	//This will return the song at the hashmap based on the songname given
 	public Song getSong(String songname){
 		return lib.get(songname);
 	}
 
-	public HashMap getlist() {
+	//this will return the hashmap so that it can be used later.
+	public HashMap<String,Song> getlist() {
 		// TODO Auto-generated method stub
 		return lib;
 	}

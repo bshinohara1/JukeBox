@@ -1,48 +1,65 @@
 package model;
 
 import java.util.HashMap;
-
+/*
+ * This is the UserDatabase class.  It stores a hashmap of users in order to store the users.
+ */
 public class UserDatabase {
 
 	HashMap<String, User> database;
 
+	//default constuctor for the user database.
 	public UserDatabase() {
 		database = new HashMap<String, User>();
+		addf();
+		
+	}
+
+	//initial adding of users.
+	private void addf() {
+		// TODO Auto-generated method stub
 		adduser(new User("Chris", "1"));
 		adduser(new User("Devon", "22"));
 		adduser(new User("River", "333"));
 		adduser(new User("Ryan", "4444"));
 	}
 
+	//checks to see if the user is in the list of users based on username
 	public boolean contain(String name) {
 		return database.containsKey(name);
 	}
 
+	//adds a user to the hashmap if it hasn't already been added.
 	public void adduser(User newuser) {
 		if (!contain(newuser.username))
 			database.put(newuser.username, newuser);
 	}
 	
+	//returns the size of the hashmap to detemine how many users there are.
 	public int size(){
 		return database.size();
 	}
 	
+	//will return a boolean to see if the username and password match.
 	public boolean validator(String loginuser, String loginpass){
 			if(database.containsKey(loginuser) && database.get(loginuser).getpass().equals(loginpass))
 				return true;
 		return false;
 	}
 	
+	//will remove a user from the hashmap.
 	public void removeuser(User newuser) {
 		if (contain(newuser.username))
 			database.remove(newuser.username);
 	}
 	
+	//will return the user based upon the login name.
 	public User getuser(String loginname){
 		return database.get(loginname);
 	}
 
-	public HashMap getlist() {
+	//will return the 
+	public HashMap<String,User> getlist() {
 		// TODO Auto-generated method stub
 		return database;
 	}
