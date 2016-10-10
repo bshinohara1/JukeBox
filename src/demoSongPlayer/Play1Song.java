@@ -2,6 +2,7 @@ package demoSongPlayer;
 
 import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
+
 /**
  * Play one audio file from the songfiles directory.
  * There is no listener for the end of song event.
@@ -18,7 +19,6 @@ public class Play1Song {
 	 * Boo
 	 */
 	public static void main(String[] args) {
-		
 		// Construct an instance of the private inner class
 		EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 		
