@@ -1,6 +1,7 @@
 package model;
 
 /*
+ * Author: Adam and Ben Shinohara
  * Class check will be used to see if the combination of the user and song can be played.
  */
 public class Checker {

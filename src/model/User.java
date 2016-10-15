@@ -1,6 +1,7 @@
 package model;
 
 /*
+ * Author: Adam and Ben Shinohara
  * This is the user class.  It is used to keep track of the users information.  Everything from their username to their 
  * credits left to play the song is stored here.
  */

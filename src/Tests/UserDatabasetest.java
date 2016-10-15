@@ -1,3 +1,6 @@
+//Author: Adam and Ben Shinohara
+//This class is composed of the Junit tests for the model view
+
 package Tests;
 import static org.junit.Assert.*;
 

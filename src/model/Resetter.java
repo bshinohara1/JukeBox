@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import java.util.Iterator;
 /*
+ * Author: Adam and Ben Shinohara
  * Resetter is a class that will determine if the next day has happened and if so it will reset the song count and the user count so that
  * they have the ability to play the song again or play more songs.
  */

@@ -3,6 +3,7 @@ package model;
 import java.util.HashMap;
 
 /*
+ * Author: Adam and Ben Shinohara
  * This is a class that makes a list of songs and stores them in a hashmap in order to retrieve the 
  * correct song.
  */
