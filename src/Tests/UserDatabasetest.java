@@ -5,6 +5,7 @@ package Tests;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -39,7 +40,7 @@ public class UserDatabasetest {
 		c = c.getDatabase();
 		SongLibrary b = null;
 		b = b.getSongLibrary();
-		Song hold = b.getSong("stuff");
+		Song hold = b.getSong("StarStrukk");
 		Resetter a = null;
 		a = a.getResetter(c, b);
 		Checker checks = new Checker();
@@ -56,9 +57,9 @@ public class UserDatabasetest {
 		assertEquals(checks.check(one, hold),1);
 		one.minusCount();
 		assertEquals(checks.check(one, hold),-1);
-		assertTrue(b.contains("stuff"));
+		assertTrue(b.contains("StarStrukk"));
 		assertEquals(hold.canbeplayed(),true);
-		assertEquals(hold.getname(),"stuff");
+		assertEquals(hold.getname(),"StarStrukk");
 		assertEquals(hold.getartist(),"3OH!3");
 		assertEquals(hold.gettime(),184);
 		hold.play();
@@ -75,6 +76,16 @@ public class UserDatabasetest {
 		assertEquals(hold.getlocation(),"songfiles/stuff.mp3");
 		c.removeuser(c.getuser("Ryan"));
 		assertEquals(c.size(),3);
+		assertEquals(3,b.getColumnCount());
+		assertEquals(String.class,b.getColumnClass(0));
+		assertEquals(String.class,b.getColumnClass(1));
+		assertEquals(Integer.class,b.getColumnClass(2));
+		assertEquals(10,b.getRowCount());
+		assertEquals("Song Title",b.getColumnName(0));
+		assertEquals("Artist",b.getColumnName(1));
+		assertEquals("Duration",b.getColumnName(2));
+		assertFalse(b.isCellEditable(0, 0));
+		Collection<Song> here = b.getSongs();
 		
 	}
 	

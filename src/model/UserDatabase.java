@@ -43,6 +43,7 @@ public class UserDatabase {
 			database.put(newuser.username, newuser);
 	}
 	
+	
 	//returns the size of the hashmap to detemine how many users there are.
 	public int size(){
 		return database.size();

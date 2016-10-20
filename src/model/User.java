@@ -27,6 +27,11 @@ public class User {
 		return credits;
 	}
 	
+	//returns the username
+	public String getname(){
+		return username;
+	}
+	
 	//returns how many more times a user can play a song 
 	public int getCount(){
 		return count;

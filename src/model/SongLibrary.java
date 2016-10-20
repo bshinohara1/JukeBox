@@ -41,7 +41,7 @@ public class SongLibrary implements TableModel{
 		addsong(new Song("Tada","Microsoft",  2, "songfiles/tada.wav"));
 		addsong(new Song("The Curtain Rises","Kevin MacLeod",  28, "songfiles/TheCurtainRises.mp3"));
 		addsong(new Song("Untameable Fire","Pierre Langer",  282, "songfiles/UntameableFire.mp3"));
-		addsong(new Song("stuff","3OH!3",  184, "songfiles/stuff.mp3"));
+		addsong(new Song("StarStrukk","3OH!3",  184, "songfiles/stuff.mp3"));
 	}
 
 	//function that add a song to the hashmap if it isn't already in the list
