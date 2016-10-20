@@ -448,7 +448,7 @@ public class LoginView extends JPanel implements Serializable {
 		{
 		FileOutputStream bytesToDisk = null;
 	    try {
-	      bytesToDisk = new FileOutputStream("jukebox.ser");
+	      bytesToDisk = new FileOutputStream("jukeboxSave.ser");
 	      ObjectOutputStream outFile = new ObjectOutputStream(bytesToDisk);
 	      outFile.writeObject(ourUsers);
 	      outFile.writeObject(ourSongs);
