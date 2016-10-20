@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 /*
  * Author: Adam and Ben Shinohara
  * This is the UserDatabase class.  It stores a hashmap of users in order to store the users.
  */
-public class UserDatabase {
+public class UserDatabase implements Serializable {
 
 	static UserDatabase Userlist = null;
 	HashMap<String, User> database;

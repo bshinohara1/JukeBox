@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import javax.swing.table.TableModel;
  * This is a class that makes a list of songs and stores them in a hashmap in order to retrieve the 
  * correct song.
  */
-public class SongLibrary implements TableModel{
+public class SongLibrary implements TableModel, Serializable{
 
 	static SongLibrary Songlib = null;
 	HashMap<String,Song> lib ;
