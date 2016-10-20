@@ -164,19 +164,20 @@ public class LoginView extends JPanel {
 		textAreaPanel.setLocation(15, 400);
 		textAreaPanel.setSize(325, 200);
 
-		ButtonListener buttonListener = new ButtonListener();
-		song1 = new JButton("Select Song 1");
-		this.add(song1);
-		song1.setLocation(500, 20);
-		song1.setSize(120, 25);
-		song1.addActionListener(buttonListener);
-
-		song2 = new JButton("Select Song 2");
-		this.add(song2);
-		song2.setLocation(500, 55);
-		song2.setSize(120, 25);
+//		ButtonListener buttonListener = new ButtonListener();
+//		song1 = new JButton("Select Song 1");
+//		this.add(song1);
+//		song1.setLocation(500, 20);
+//		song1.setSize(120, 25);
+//		song1.addActionListener(buttonListener);
+//
+//		song2 = new JButton("Select Song 2");
+//		this.add(song2);
+//		song2.setLocation(500, 55);
+//		song2.setSize(120, 25);
+//		this.setBackground(Color.PINK);
+//		song2.addActionListener(buttonListener);
 		this.setBackground(Color.PINK);
-		song2.addActionListener(buttonListener);
 
 	}
 
