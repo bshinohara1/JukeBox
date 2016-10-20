@@ -13,6 +13,13 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -41,7 +48,7 @@ import songplayer.EndOfSongListener;
 import songplayer.SongPlayer;
 
 //LoginView Class that extends JPanel
-public class LoginView extends JPanel {
+public class LoginView extends JPanel implements Serializable {
 
 	private JButton song1;
 	private JButton song2;
@@ -71,25 +78,57 @@ public class LoginView extends JPanel {
 
 
 
+	
 	// Constructor that is used to initialize all the instance variables
 	// this includes intializing all the panel components
 	public LoginView(int width, int height, SongLibrary lib, UserDatabase users) {
+		int choice = JOptionPane.showConfirmDialog(null, "Load saved collection");
+	    System.out.println(choice);
+	    if (choice == 0) {
+	       startWithPersistentVersion();
+	    }
+	    else
+	    {
 		ourUsers = users;
 		ourSongs = lib;
-		this.height = height;
-		this.width = width;
 		userStatus = false;
 		ourQueue = new LinkedList<Song>();
-		myRest = null;
-		myRest =  myRest.getResetter(users, lib);
 		myCheck = new Checker();
 		firstSong = ourSongs.getSong("Tada");
 		secondSong = ourSongs.getSong("Space Music");
 		initializeJTextAreaPanel();
 		initializeQueuePanel();
 		initializeJTable();
+	    }
+	    this.height = height;
+		this.width = width;
+		myRest = null;
+		myRest =  myRest.getResetter(users, lib);
+		myCheck = new Checker();
+		initializeJTextAreaPanel();
+		initializeQueuePanel();
+		initializeJTable();
 	}
 	
+
+	private void startWithPersistentVersion() {
+		 try {
+		      ObjectInputStream inFile = new ObjectInputStream(new FileInputStream("jukeboxSave.ser"));
+		      ourUsers = (UserDatabase) inFile.readObject();
+		      ourSongs = (SongLibrary) inFile.readObject();
+		      curUser = (User) inFile.readObject();
+		      ourQueue = (Queue<Song>) inFile.readObject();
+		      userStatus = (boolean) inFile.readObject();
+		      inFile.close();
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    } catch (ClassNotFoundException e) {
+		      e.printStackTrace();
+		    }
+		
+	}
+
+
 	private void initializeJTable() {
 		model = ourSongs;
 		table = new JTable(model);
@@ -145,7 +184,7 @@ public class LoginView extends JPanel {
 		while (qIterator.hasNext())
 		{
 			Song temp = (Song) qIterator.next();
-			result += temp.getname() + " " + temp.getartist() + " " + temp.gettime() + "\n";
+			result += temp.getname() + " by " + temp.getartist() + " is " + temp.gettime() + " seconds\n";
  		}
 		return result;
 		
@@ -404,6 +443,29 @@ public class LoginView extends JPanel {
 			String result = sHours + ":" + sMinutes + ":" + sSeconds;
 			return result;
 		}
+	}
+
+	public int close() {
+		int choice = JOptionPane.showConfirmDialog(null, "Save Jukebox collection");
+		if (choice == 1)
+		{
+		FileOutputStream bytesToDisk = null;
+	    try {
+	      bytesToDisk = new FileOutputStream("jukebox.ser");
+	      ObjectOutputStream outFile = new ObjectOutputStream(bytesToDisk);
+	      outFile.writeObject(ourUsers);
+	      outFile.writeObject(ourSongs);
+	      outFile.writeObject(curUser);
+	      outFile.writeObject(ourQueue);
+	      outFile.writeObject(userStatus);
+	      outFile.close();
+	   } catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    } catch (IOException e) {
+	    e.printStackTrace();
+	  }
+		}
+		return 0;
 	}
 
 }

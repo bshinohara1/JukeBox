@@ -9,6 +9,10 @@
 package Controller;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,7 +40,6 @@ public class JukeBoxStartGui extends JFrame {
 	// sets the width and height, and sets when to close
 	// the JFrame
 	public JukeBoxStartGui() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(width, height);
 		this.setLocation(100, 40);
 		this.setTitle("JukeBox");
@@ -48,6 +51,22 @@ public class JukeBoxStartGui extends JFrame {
 		
 		// Set default view
 		setViewTo(loginView);
+		WindowListener1 windowListen = new WindowListener1();
+		this.addWindowListener(windowListen);
+		
+	}
+	private class WindowListener1 extends WindowAdapter {
+
+		
+
+		@Override
+		public void windowClosed(WindowEvent e) {
+			// TODO Auto-generated method stub
+			System.exit(loginView.close());
+		}
+
+		
+		
 	}
 
 	// Sets the current JPanel. This function is used to
