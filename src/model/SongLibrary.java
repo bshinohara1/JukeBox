@@ -122,7 +122,7 @@ public class SongLibrary implements TableModel{
 		Song temp = (Song) list[rowIndex];
 		if(columnIndex == 0)
 			return temp.name;
-		if(columnIndex == 0)
+		if(columnIndex == 1)
 			return temp.artist;
 		return temp.time;
 	}

@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
 import org.junit.Test;
 
 import model.Checker;
@@ -72,6 +75,9 @@ public class UserDatabasetest {
 		assertEquals(hold.getlocation(),"songfiles/stuff.mp3");
 		c.removeuser(c.getuser("Ryan"));
 		assertEquals(c.size(),3);
+		
 	}
+	
+	
 
 }
