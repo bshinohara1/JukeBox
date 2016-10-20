@@ -86,6 +86,7 @@ public class LoginView extends JPanel implements Serializable {
 	    System.out.println(choice);
 	    if (choice == 0) {
 	       startWithPersistentVersion();
+	       myRest.checkday();
 	       if (curUser != null)
 	       {
 	       status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
