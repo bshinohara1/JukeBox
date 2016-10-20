@@ -27,8 +27,8 @@ public class JukeBoxStartGui extends JFrame {
 	private JPanel currentView;
 	public static final int width = 450;
 	public static final int height = 400;
-	private SongLibrary lib;
-	private UserDatabase users;
+	private SongLibrary lib = null;
+	private UserDatabase users = null;
 
 	// Constructor that initializes all the variables,
 	// sets the width and height, and sets when to close
@@ -38,8 +38,8 @@ public class JukeBoxStartGui extends JFrame {
 		this.setSize(width, height);
 		this.setLocation(100, 40);
 		this.setTitle("Tic Tac Toe");
-		users = new UserDatabase();
-		lib = new SongLibrary();
+		users = users.getDatabase();
+		lib = lib.getSongLibrary();
 
 		loginView = new LoginView(width, height, lib, users);
 		// Set default view

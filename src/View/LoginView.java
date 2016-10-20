@@ -65,7 +65,8 @@ public class LoginView extends JPanel {
 		this.width = width;
 		userStatus = false;
 		ourQueue = new LinkedList<Song>();
-		myRest = new Resetter(users, lib);
+		myRest = null;
+		myRest =  myRest.getResetter(users, lib);
 		myCheck = new Checker();
 		firstSong = ourSongs.getSong("Tada");
 		secondSong = ourSongs.getSong("Space Music");

@@ -12,17 +12,24 @@ import java.util.Iterator;
  */
 public class Resetter {
 	
+	static Resetter Resets = null;
 	public LocalDateTime dates;
 	LocalDate cur;
 	UserDatabase users;
 	SongLibrary songs;
 	
 	//local consuctor for the resetter, takes a UserDatabase and a Songlibrary for future use of resetting.
-	public Resetter(UserDatabase a, SongLibrary b){
+	private Resetter(UserDatabase a, SongLibrary b){
 		users = a;
 		songs = b;
 		cur = LocalDate.now();
 		dates = cur.atStartOfDay();
+	}
+	
+	public static Resetter getResetter(UserDatabase a, SongLibrary b){
+		if(Resets == null)
+			Resets = new Resetter(a,b);
+		return Resets;
 	}
 	
 	//checks to see if the day has changed and if so it will reset the values in bot collections.

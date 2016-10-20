@@ -7,13 +7,20 @@ import java.util.HashMap;
  */
 public class UserDatabase {
 
+	static UserDatabase Userlist = null;
 	HashMap<String, User> database;
 
 	//default constuctor for the user database.
-	public UserDatabase() {
+	private UserDatabase() {
 		database = new HashMap<String, User>();
 		addf();
 		
+	}
+	
+	public static UserDatabase getDatabase(){
+		if(Userlist == null)
+			Userlist = new UserDatabase();
+		return Userlist;
 	}
 
 	//initial adding of users.

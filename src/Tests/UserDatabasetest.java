@@ -20,7 +20,8 @@ public class UserDatabasetest {
 	//Tests that the userdatabase works.
 	@Test
 	public void test() {
-		UserDatabase a = new UserDatabase();
+		UserDatabase a = null; 
+		a = a.getDatabase();
 		assertEquals(a.size(),4);
 		assertTrue(a.contain("Chris"));
 		assertTrue(a.validator("Chris", "1"));
@@ -31,10 +32,13 @@ public class UserDatabasetest {
 	//song,user, and userdatabase to ensure that the code works as intended.
 	@Test
 	public void test1() {
-		UserDatabase c = new UserDatabase();
-		SongLibrary b = new SongLibrary();
+		UserDatabase c = null;
+		c = c.getDatabase();
+		SongLibrary b = null;
+		b = b.getSongLibrary();
 		Song hold = b.getSong("stuff");
-		Resetter a = new Resetter(c,b);
+		Resetter a = null;
+		a = a.getResetter(c, b);
 		Checker checks = new Checker();
 		assertTrue(c.contain("Chris"));
 		User one = c.getuser("Chris");

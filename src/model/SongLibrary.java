@@ -9,12 +9,18 @@ import java.util.HashMap;
  */
 public class SongLibrary {
 
+	static SongLibrary Songlib = null;
 	HashMap<String,Song> lib ;
 	
-	public SongLibrary(){
+	private SongLibrary(){
 		lib = new HashMap<String , Song>();
 		in();
 		
+	}
+	public static SongLibrary getSongLibrary(){
+		if(Songlib == null)
+			Songlib = new SongLibrary();
+		return Songlib;
 	}
 
 	//adds the initial songs to the hashmap
