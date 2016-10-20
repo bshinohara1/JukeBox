@@ -57,7 +57,7 @@ public class LoginView extends JPanel implements Serializable {
 	private int height, width;
 	private JLabel accountName;
 	private JLabel password;
-	private JLabel status;
+	private JLabel status = new JLabel("Not logged in");
 	private JTextField textEditorAcc;
 	private JPasswordField textEditorPass;
 	private SongLibrary ourSongs;
@@ -86,6 +86,18 @@ public class LoginView extends JPanel implements Serializable {
 	    System.out.println(choice);
 	    if (choice == 0) {
 	       startWithPersistentVersion();
+	       if (curUser != null)
+	       {
+	       status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
+					+ format(curUser.getCredits()));
+	       }
+	       if (!ourQueue.isEmpty())
+	       {
+	    	   EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
+			   SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
+	       }
+
+	       
 	    }
 	    else
 	    {
@@ -107,6 +119,41 @@ public class LoginView extends JPanel implements Serializable {
 		initializeJTable();
 	}
 	
+
+	// Formats the time in seconds that is sent to it, and
+		// returns the amount of time in a string representing
+		// hours, minutes, and seconds
+		private String format(int credits) {
+			int hours = credits / 3600;
+			String sHours = new String("");
+			if (hours < 10) {
+				sHours = "0" + hours;
+			} else {
+				sHours = "" + hours;
+			}
+			int minutes = credits % 3600;
+			int minutesForS = minutes;
+			minutes = minutes / 60;
+
+			String sMinutes;
+			if (minutes < 10) {
+				sMinutes = "0" + minutes;
+			} else {
+				sMinutes = "" + minutes;
+			}
+			int sec = minutesForS % 60;
+
+			String sSeconds = new String();
+			if (sec < 10) {
+				sSeconds = "0" + sec;
+			} else {
+				sSeconds = "" + sec;
+			}
+			String result = sHours + ":" + sMinutes + ":" + sSeconds;
+			return result;
+		}
+	
+
 
 	private void startWithPersistentVersion() {
 		 try {
@@ -227,7 +274,7 @@ public class LoginView extends JPanel implements Serializable {
 		signOut.setSize(120, 40);
 		signOut.addActionListener(buttonListener1);
 
-		status = new JLabel("Not logged in");
+		
 		textAreaPanel.add(status);
 		status.setLocation(25, 150);
 		status.setSize(300, 30);
