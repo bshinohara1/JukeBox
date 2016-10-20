@@ -17,6 +17,8 @@ public class UserDatabase {
 		
 	}
 	
+	//Function that checks and see if the user database has been made.  If
+	//it has been made it returns it or it will make a new database and return it.
 	public static UserDatabase getDatabase(){
 		if(Userlist == null)
 			Userlist = new UserDatabase();

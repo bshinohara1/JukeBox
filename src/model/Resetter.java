@@ -26,6 +26,7 @@ public class Resetter {
 		dates = cur.atStartOfDay();
 	}
 	
+	//if there is no resetter then it makes one and returns it otherwise it returns the current resetter.
 	public static Resetter getResetter(UserDatabase a, SongLibrary b){
 		if(Resets == null)
 			Resets = new Resetter(a,b);

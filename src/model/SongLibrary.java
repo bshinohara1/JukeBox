@@ -17,12 +17,14 @@ public class SongLibrary implements TableModel{
 	HashMap<String,Song> lib ;
 	Object[] list;
 	
+	//constuctor for the song library
 	private SongLibrary(){
 		lib = new HashMap<String , Song>();
 		list = lib.values().toArray();
 		in();
 		
 	}
+	//checks to see if the library has been made if not makes it and returns it.
 	public static SongLibrary getSongLibrary(){
 		if(Songlib == null)
 			Songlib = new SongLibrary();
@@ -83,11 +85,13 @@ public class SongLibrary implements TableModel{
 		return lib.values();
 	}
 	
+	//rewrites the default function but isn't used
 	@Override
 	public void addTableModelListener(TableModelListener l) {
 		// TODO Auto-generated method stub
 		
 	}
+	//will return the class of the column at a certain index.
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		// TODO Auto-generated method stub
@@ -95,11 +99,13 @@ public class SongLibrary implements TableModel{
 			return Integer.class;
 		return String.class;
 	}
+	//Will return the length of the JTable
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return 3;
 	}
+	//Will return the name of the column based on a index
 	@Override
 	public String getColumnName(int columnIndex) {
 		// TODO Auto-generated method stub
@@ -115,7 +121,7 @@ public class SongLibrary implements TableModel{
 		// TODO Auto-generated method stub
 		return list.length;
 	}
-	
+	//Will return the value at a certain row and column.
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
@@ -126,18 +132,19 @@ public class SongLibrary implements TableModel{
 			return temp.artist;
 		return temp.time;
 	}
-	
+	//rewrites the default function but isn't changed
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+	//rewrites the default function but isn't used
 	@Override
 	public void removeTableModelListener(TableModelListener l) {
 		// TODO Auto-generated method stub
 		
 	}
+	//rewrites the default function but isn't used
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub

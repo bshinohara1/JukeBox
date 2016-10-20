@@ -86,7 +86,9 @@ public class UserDatabasetest {
 		assertEquals("Duration",b.getColumnName(2));
 		assertFalse(b.isCellEditable(0, 0));
 		Collection<Song> here = b.getSongs();
-		
+		String temps = (String) b.getValueAt(0, 0);
+		String temp1 = (String) b.getValueAt(0, 1);
+		int temp3 =  (int) b.getValueAt(0, 2);
 	}
 	
 	
