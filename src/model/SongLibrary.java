@@ -3,18 +3,23 @@ package model;
 import java.util.Collection;
 import java.util.HashMap;
 
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+
 /*
  * Author: Adam and Ben Shinohara
  * This is a class that makes a list of songs and stores them in a hashmap in order to retrieve the 
  * correct song.
  */
-public class SongLibrary {
+public class SongLibrary implements TableModel{
 
 	static SongLibrary Songlib = null;
 	HashMap<String,Song> lib ;
+	Object[] list;
 	
 	private SongLibrary(){
 		lib = new HashMap<String , Song>();
+		list = lib.values().toArray();
 		in();
 		
 	}
@@ -45,6 +50,7 @@ public class SongLibrary {
 		if(!lib.containsKey(song.name)){
 			lib.put(song.name,song);
 		}
+		list=lib.values().toArray();
 	}
 	
 	//This will remove a song given the song name.
@@ -53,6 +59,7 @@ public class SongLibrary {
 		if(lib.containsKey(songname)){
 			lib.remove(songname);
 		}
+		list= lib.values().toArray();
 	}
 	
 	//Will return a boolean telling if the song is contained in the hashmap.
@@ -74,6 +81,66 @@ public class SongLibrary {
 	//this will return a collection of all the songs
 	public Collection<Song> getSongs(){
 		return lib.values();
+	}
+	
+	@Override
+	public void addTableModelListener(TableModelListener l) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		// TODO Auto-generated method stub
+		if(columnIndex == 2)
+			return Integer.class;
+		return String.class;
+	}
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 3;
+	}
+	@Override
+	public String getColumnName(int columnIndex) {
+		// TODO Auto-generated method stub
+		if (columnIndex == 0)
+		      return "Song Title";
+		    if (columnIndex == 1)
+		      return "Artist";
+		    return "Duration";
+	}
+	
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return list.length;
+	}
+	
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		Song temp = (Song) list[rowIndex];
+		if(columnIndex == 0)
+			return temp.name;
+		if(columnIndex == 0)
+			return temp.artist;
+		return temp.time;
+	}
+	
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public void removeTableModelListener(TableModelListener l) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
 		
 	}
 	

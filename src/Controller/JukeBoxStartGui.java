@@ -37,7 +37,7 @@ public class JukeBoxStartGui extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(width, height);
 		this.setLocation(100, 40);
-		this.setTitle("Tic Tac Toe");
+		this.setTitle("JukeBox");
 		users = users.getDatabase();
 		lib = lib.getSongLibrary();
 
