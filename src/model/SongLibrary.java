@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 /*
@@ -70,5 +71,10 @@ public class SongLibrary {
 		return lib;
 	}
 	
+	//this will return a collection of all the songs
+	public Collection<Song> getSongs(){
+		return lib.values();
+		
+	}
 	
 }
