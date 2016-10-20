@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
@@ -12,7 +14,7 @@ import javax.swing.table.TableModel;
  * This is a class that makes a list of songs and stores them in a hashmap in order to retrieve the 
  * correct song.
  */
-public class SongLibrary implements TableModel, Serializable{
+public class SongLibrary implements TableModel, Serializable, ListModel{
 
 	static SongLibrary Songlib = null;
 	HashMap<String,Song> lib ;
@@ -148,6 +150,26 @@ public class SongLibrary implements TableModel, Serializable{
 	//rewrites the default function but isn't used
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void addListDataListener(ListDataListener l) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Object getElementAt(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return lib.size();
+	}
+	@Override
+	public void removeListDataListener(ListDataListener l) {
 		// TODO Auto-generated method stub
 		
 	}

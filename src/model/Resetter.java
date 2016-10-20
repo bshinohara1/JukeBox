@@ -1,4 +1,5 @@
 package model;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -10,7 +11,7 @@ import java.util.Iterator;
  * Resetter is a class that will determine if the next day has happened and if so it will reset the song count and the user count so that
  * they have the ability to play the song again or play more songs.
  */
-public class Resetter {
+public class Resetter implements Serializable{
 	
 	static Resetter Resets = null;
 	public LocalDateTime dates;
