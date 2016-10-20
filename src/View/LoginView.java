@@ -22,8 +22,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import model.Checker;
 import model.Resetter;
@@ -59,6 +64,11 @@ public class LoginView extends JPanel {
 	private Checker myCheck;
 	private JTextArea queueArea;
 	private JLabel queueAreaLabel;
+	private TableModel model;
+	private JTable table;
+	private JLabel tableLabel;
+	private JButton playButton;
+
 
 
 	// Constructor that is used to initialize all the instance variables
@@ -77,8 +87,38 @@ public class LoginView extends JPanel {
 		secondSong = ourSongs.getSong("Space Music");
 		initializeJTextAreaPanel();
 		initializeQueuePanel();
+		initializeJTable();
 	}
 	
+	private void initializeJTable() {
+		model = ourSongs;
+		table = new JTable(model);
+		JScrollPane scrollPane = new JScrollPane(table);
+		RowSorter<TableModel> rowSorter = new TableRowSorter<TableModel>(model);
+		table.setRowSorter(rowSorter);
+		scrollPane.setLocation(430, 40);
+		scrollPane.setSize(400, 530);
+		this.add(scrollPane);
+		tableLabel = new JLabel("Select a song from this Jukebox");
+		tableLabel.setLocation(430, 10);
+		tableLabel.setSize(325, 30);
+		this.add(tableLabel);
+		ButtonListener buttonListener = new ButtonListener();
+		playButton = new JButton("Play");
+		this.add(playButton);
+		playButton.setLocation(350, 120);
+		playButton.setSize(65, 30);
+		playButton.addActionListener(buttonListener);
+				
+				
+				
+//		song1 = new JButton("Select Song 1");
+//		this.add(song1);
+//		song1.setLocation(500, 20);
+//		song1.setSize(120, 25);
+//		song1.addActionListener(buttonListener);
+	}
+
 	private void initializeQueuePanel()
 	{
 		
@@ -250,11 +290,10 @@ public class LoginView extends JPanel {
 				JOptionPane.showMessageDialog(null, "Must be logged in to play a song");
 			} else {
 
-				if (buttonClicked.getText().equals("Select Song 1")) {
-					songSelected = firstSong;
-				} else {
-					songSelected = secondSong;
-				}
+				int selectedRow = table.convertRowIndexToModel(table.getSelectedRow());
+				String songName = (String) model.getValueAt(selectedRow, 0);
+				songSelected = ourSongs.getSong(songName);
+				
 
 				myRest.checkday();
 				int checkValue = myCheck.check(curUser, songSelected);
@@ -270,7 +309,7 @@ public class LoginView extends JPanel {
 					curUser.minusCount();
 					songSelected.play();
 					curUser.minusCredits(songSelected.gettime());
-					status.setText("Status: Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
+					status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
 							+ format(curUser.getCredits()));
 
 					if (ourQueue.isEmpty()) {
@@ -312,7 +351,7 @@ public class LoginView extends JPanel {
 
 				if (ourUsers.validator(userName, userPass)) {
 					curUser = ourUsers.getuser(userName);
-					status.setText("Status: Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
+					status.setText(userName + ": Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
 							+ format(curUser.getCredits()));
 					userStatus = true;
 				} else {
