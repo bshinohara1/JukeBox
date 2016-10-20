@@ -108,11 +108,11 @@ public class LoginView extends JPanel implements Serializable {
 		myCheck = new Checker();
 		firstSong = ourSongs.getSong("Tada");
 		secondSong = ourSongs.getSong("Space Music");
+		myRest =  myRest.getResetter(users, lib);
 	    }
 	    this.height = height;
 		this.width = width;
 		myRest = null;
-		myRest =  myRest.getResetter(users, lib);
 		myCheck = new Checker();
 		initializeJTextAreaPanel();
 		initializeQueuePanel();
@@ -163,6 +163,7 @@ public class LoginView extends JPanel implements Serializable {
 		      curUser = (User) inFile.readObject();
 		      ourQueue = (Queue<Song>) inFile.readObject();
 		      userStatus = (boolean) inFile.readObject();
+		      myRest = (Resetter) inFile.readObject();
 		      inFile.close();
 		    } catch (IOException e) {
 		      e.printStackTrace();
@@ -502,6 +503,7 @@ public class LoginView extends JPanel implements Serializable {
 	      outFile.writeObject(curUser);
 	      outFile.writeObject(ourQueue);
 	      outFile.writeObject(userStatus);
+	      outFile.writeObject(myRest);
 	      outFile.close();
 	   } catch (FileNotFoundException e) {
 	      e.printStackTrace();
