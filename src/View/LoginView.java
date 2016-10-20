@@ -444,7 +444,7 @@ public class LoginView extends JPanel implements Serializable {
 
 	public int close() {
 		int choice = JOptionPane.showConfirmDialog(null, "Save Jukebox collection");
-		if (choice == 1)
+		if (choice == 0)
 		{
 		FileOutputStream bytesToDisk = null;
 	    try {
