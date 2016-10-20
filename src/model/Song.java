@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 
 /*
  * Author: Adam and Ben Shinohara
  * This is the class song.  Contain all the information that a song should have.
  */
-public class Song {
+public class Song implements Serializable{
 	String name;
 	String artist;
 	int time;
