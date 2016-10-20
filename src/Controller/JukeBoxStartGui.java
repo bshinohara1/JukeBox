@@ -8,6 +8,8 @@
 
 package Controller;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -25,8 +27,8 @@ public class JukeBoxStartGui extends JFrame {
 
 	private LoginView loginView;
 	private JPanel currentView;
-	public static final int width = 450;
-	public static final int height = 400;
+	public static final int width = 900;
+	public static final int height = 650;
 	private SongLibrary lib = null;
 	private UserDatabase users = null;
 
@@ -40,8 +42,10 @@ public class JukeBoxStartGui extends JFrame {
 		this.setTitle("JukeBox");
 		users = users.getDatabase();
 		lib = lib.getSongLibrary();
-
+		
 		loginView = new LoginView(width, height, lib, users);
+		loginView.setLocation(25, 425);
+		
 		// Set default view
 		setViewTo(loginView);
 	}

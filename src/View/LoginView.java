@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.Checker;
@@ -55,6 +57,9 @@ public class LoginView extends JPanel {
 	private Song secondSong;
 	private Resetter myRest;
 	private Checker myCheck;
+	private JTextArea queueArea;
+	private JLabel queueAreaLabel;
+
 
 	// Constructor that is used to initialize all the instance variables
 	// this includes intializing all the panel components
@@ -71,6 +76,39 @@ public class LoginView extends JPanel {
 		firstSong = ourSongs.getSong("Tada");
 		secondSong = ourSongs.getSong("Space Music");
 		initializeJTextAreaPanel();
+		initializeQueuePanel();
+	}
+	
+	private void initializeQueuePanel()
+	{
+		
+		//Font myFont = new Font("Courier", Font.BOLD, 36);
+		queueArea = new JTextArea("");
+		queueArea.setLocation(15, 40);
+		queueArea.setSize(325, 350);
+		this.add(queueArea);
+		if (ourQueue != null && !ourQueue.isEmpty())
+		{
+			queueArea.setText(printQueue());
+		}
+		
+		queueAreaLabel = new JLabel("Play List (Song at the top is currently playing)");
+		queueAreaLabel.setLocation(15, 10);
+		queueAreaLabel.setSize(325, 30);
+		this.add(queueAreaLabel);
+	}
+	
+	private String printQueue()
+	{
+		Iterator qIterator = ourQueue.iterator();
+		String result = "";
+		while (qIterator.hasNext())
+		{
+			Song temp = (Song) qIterator.next();
+			result += temp.getname() + " " + temp.getartist() + " " + temp.gettime() + "\n";
+ 		}
+		return result;
+		
 	}
 
 	// This function is used to initialize the JPanel.
@@ -87,35 +125,35 @@ public class LoginView extends JPanel {
 		textEditorAcc = new JTextField("", 50);
 		textEditorPass = new JPasswordField("", 50);
 		textAreaPanel.add(accountName);
-		accountName.setLocation(100, 10);
+		accountName.setLocation(25, 10);
 		accountName.setSize(100, 30);
 		textAreaPanel.add(textEditorAcc);
-		textEditorAcc.setLocation(200, 10);
+		textEditorAcc.setLocation(125, 10);
 		textEditorAcc.setSize(150, 30);
 
 		textAreaPanel.add(password);
-		password.setLocation(100, 50);
+		password.setLocation(25, 50);
 		password.setSize(100, 30);
 		textAreaPanel.add(textEditorPass);
-		textEditorPass.setLocation(200, 50);
+		textEditorPass.setLocation(125, 50);
 		textEditorPass.setSize(150, 30);
 
 		ButtonListener1 buttonListener1 = new ButtonListener1();
 		login = new JButton("Login");
 		textAreaPanel.add(login);
-		login.setLocation(230, 100);
+		login.setLocation(155, 100);
 		login.setSize(120, 40);
 		login.addActionListener(buttonListener1);
 
 		signOut = new JButton("Sign Out");
 		textAreaPanel.add(signOut);
-		signOut.setLocation(100, 100);
+		signOut.setLocation(25, 100);
 		signOut.setSize(120, 40);
 		signOut.addActionListener(buttonListener1);
 
 		status = new JLabel("Not logged in");
 		textAreaPanel.add(status);
-		status.setLocation(100, 150);
+		status.setLocation(25, 150);
 		status.setSize(300, 30);
 
 		textAreaPanel.setBackground(Color.PINK);
@@ -123,19 +161,19 @@ public class LoginView extends JPanel {
 		this.add(textAreaPanel);
 
 		this.setLayout(null);
-		textAreaPanel.setLocation(10, 100);
-		textAreaPanel.setSize(400, 200);
+		textAreaPanel.setLocation(15, 400);
+		textAreaPanel.setSize(325, 200);
 
 		ButtonListener buttonListener = new ButtonListener();
 		song1 = new JButton("Select Song 1");
 		this.add(song1);
-		song1.setLocation(20, 20);
+		song1.setLocation(500, 20);
 		song1.setSize(120, 25);
 		song1.addActionListener(buttonListener);
 
 		song2 = new JButton("Select Song 2");
 		this.add(song2);
-		song2.setLocation(20, 55);
+		song2.setLocation(500, 55);
 		song2.setSize(120, 25);
 		this.setBackground(Color.PINK);
 		song2.addActionListener(buttonListener);
@@ -152,10 +190,12 @@ public class LoginView extends JPanel {
 		// Utilizes a queue to do this
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
 			ourQueue.remove();
+			queueArea.setText(printQueue());
 			if (!ourQueue.isEmpty()) {
 				EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 				SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
 			}
+			
 		}
 	}
 
@@ -234,10 +274,12 @@ public class LoginView extends JPanel {
 
 					if (ourQueue.isEmpty()) {
 						ourQueue.add(songSelected);
+						queueArea.setText(printQueue());
 						EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 						SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
 					} else {
 						ourQueue.add(songSelected);
+						queueArea.setText(printQueue());
 					}
 
 				}
