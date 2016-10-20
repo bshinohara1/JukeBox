@@ -1,11 +1,13 @@
 package model;
 
+import java.io.Serializable;
+
 /*
  * Author: Adam and Ben Shinohara
  * This is the user class.  It is used to keep track of the users information.  Everything from their username to their 
  * credits left to play the song is stored here.
  */
-public class User {
+public class User implements Serializable{
 
 	int maxplays = 3;
 	int beginCredits = 1500*60;
