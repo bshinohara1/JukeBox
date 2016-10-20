@@ -112,7 +112,6 @@ public class LoginView extends JPanel implements Serializable {
 	    }
 	    this.height = height;
 		this.width = width;
-		myRest = null;
 		myCheck = new Checker();
 		initializeJTextAreaPanel();
 		initializeQueuePanel();
@@ -373,7 +372,6 @@ public class LoginView extends JPanel implements Serializable {
 			if (!userStatus) {
 				JOptionPane.showMessageDialog(null, "Must be logged in to play a song");
 			} else {
-
 				int selectedRow = table.convertRowIndexToModel(table.getSelectedRow());
 				String songName = (String) model.getValueAt(selectedRow, 0);
 				songSelected = ourSongs.getSong(songName);
