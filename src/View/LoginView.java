@@ -96,9 +96,6 @@ public class LoginView extends JPanel implements Serializable {
 		myCheck = new Checker();
 		firstSong = ourSongs.getSong("Tada");
 		secondSong = ourSongs.getSong("Space Music");
-		initializeJTextAreaPanel();
-		initializeQueuePanel();
-		initializeJTable();
 	    }
 	    this.height = height;
 		this.width = width;

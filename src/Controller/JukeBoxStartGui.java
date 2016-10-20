@@ -60,7 +60,7 @@ public class JukeBoxStartGui extends JFrame {
 		
 
 		@Override
-		public void windowClosed(WindowEvent e) {
+		public void windowClosing(WindowEvent e) {
 			// TODO Auto-generated method stub
 			System.exit(loginView.close());
 		}
