@@ -26,6 +26,7 @@ import java.util.Queue;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -33,11 +34,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.RowSorter;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.Checker;
+import model.PlayList;
 import model.Resetter;
 import model.Song;
 import model.SongLibrary;
@@ -73,8 +78,11 @@ public class LoginView extends JPanel implements Serializable {
 	private JLabel queueAreaLabel;
 	private TableModel model;
 	private JTable table;
+	private JList list;
+	private ListModel listModel;
 	private JLabel tableLabel;
 	private JButton playButton;
+	private PlayList ourPlay;
 
 	// Constructor that is used to initialize all the instance variables
 	// this includes intializing all the panel components. Only intitialized
@@ -111,6 +119,7 @@ public class LoginView extends JPanel implements Serializable {
 		initializeJTextAreaPanel();
 		initializeQueuePanel();
 		initializeJTable();
+		//initializeJList();
 	}
 
 	// Formats the time in seconds that is sent to it, and
@@ -166,6 +175,42 @@ public class LoginView extends JPanel implements Serializable {
 		}
 
 	}
+	
+	private void initializeJList()
+	{
+		ourPlay = ourPlay.getSongPlayList(ourQueue);
+		listModel = ourPlay;
+		list = new JList(listModel);
+		ListDataListener1 ourDataListener = new ListDataListener1();
+		listModel.addListDataListener(ourDataListener);
+		list.setLayoutOrientation(JList.VERTICAL);
+		for (int x = 0; x < listModel.getSize(); x++)
+		{
+			list.ensureIndexIsVisible(x);
+		}
+		list.setLocation(15, 10);
+		list.setSize(325, 30);
+		this.add(list);
+	}
+	private class ListDataListener1 implements ListDataListener {
+		   
+		@Override
+		public void contentsChanged(ListDataEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void intervalAdded(ListDataEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void intervalRemoved(ListDataEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	} 
+
 
 	// Intializes the Table component of the view. This table is composed
 	// of three colums for song tiltle, artist, and length. Songs are
