@@ -26,6 +26,7 @@ import java.util.Queue;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -69,7 +70,9 @@ public class LoginView extends JPanel implements Serializable {
 	private Song secondSong;
 	private Resetter myRest;
 	private Checker myCheck;
-	private JTextArea queueArea;
+	//private JTextArea queueArea;
+	private JList<String> queueArea;
+	ListModel1<String> stuff = new ListModel1<>();
 	private JLabel queueAreaLabel;
 	private TableModel model;
 	private JTable table;
@@ -207,13 +210,15 @@ public class LoginView extends JPanel implements Serializable {
 	{
 		
 		//Font myFont = new Font("Courier", Font.BOLD, 36);
-		queueArea = new JTextArea("");
+		//queueArea = new JTextArea("");
+		queueArea = new JList(stuff);
 		queueArea.setLocation(15, 40);
 		queueArea.setSize(325, 350);
 		this.add(queueArea);
 		if (ourQueue != null && !ourQueue.isEmpty())
 		{
-			queueArea.setText(printQueue());
+			//queueArea.setText(printQueue());
+			stuff.addElement(printQueue());
 		}
 		
 		queueAreaLabel = new JLabel("Play List (Song at the top is currently playing)");
@@ -315,7 +320,9 @@ public class LoginView extends JPanel implements Serializable {
 		// Utilizes a queue to do this
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
 			ourQueue.remove();
-			queueArea.setText(printQueue());
+			//queueArea.setText(printQueue());
+			stuff.remove(0);
+			stuff.addElement(printQueue());
 			if (!ourQueue.isEmpty()) {
 				EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 				SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
@@ -397,12 +404,14 @@ public class LoginView extends JPanel implements Serializable {
 
 					if (ourQueue.isEmpty()) {
 						ourQueue.add(songSelected);
-						queueArea.setText(printQueue());
+						//queueArea.setText(printQueue());
+						stuff.addElement(printQueue());
 						EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 						SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
 					} else {
 						ourQueue.add(songSelected);
-						queueArea.setText(printQueue());
+						//queueArea.setText(printQueue());
+						stuff.addElement(printQueue());
 					}
 
 				}
