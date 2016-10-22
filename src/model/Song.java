@@ -23,6 +23,7 @@ public class Song implements Serializable {
 		played = maxplays;
 	}
 
+	//makes a string of the song
 	public String toString(){
 		return getname() + " by " + getartist() + " is " + gettime() + " seconds";
 	}
