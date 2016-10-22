@@ -4,7 +4,7 @@
 //this initial Jukebox. Utilizes the login view class 
 //as it's main functional component. Need a SongLibrary
 //and userdatabase to have the GUI function properly
-//and create the login view
+//and create the login view. Utilizes a windowlistener 
 
 package Controller;
 
@@ -45,28 +45,30 @@ public class JukeBoxStartGui extends JFrame {
 		this.setTitle("JukeBox");
 		users = users.getDatabase();
 		lib = lib.getSongLibrary();
-		
+
 		loginView = new LoginView(width, height, lib, users);
 		loginView.setLocation(25, 425);
-		
+
 		// Set default view
 		setViewTo(loginView);
 		WindowListener1 windowListen = new WindowListener1();
 		this.addWindowListener(windowListen);
-		
+
 	}
+
+	// Window listener private classs that is used as an adapter.
+	// Only the necessary functions in the listener are changed
 	private class WindowListener1 extends WindowAdapter {
 
-		
-
+		// When the window closes, this function runs to determine
+		// the action that is taken. Calls another close function
+		// to determine if the state of the collection should be saved
 		@Override
 		public void windowClosing(WindowEvent e) {
 			// TODO Auto-generated method stub
 			System.exit(loginView.close());
 		}
 
-		
-		
 	}
 
 	// Sets the current JPanel. This function is used to

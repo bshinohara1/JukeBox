@@ -157,7 +157,9 @@ public class LoginView extends JPanel implements Serializable {
 		}
 	
 
-
+// If starting with a saved version is selected then this function runs to
+	// read
+	// in the contents of that file to the selected variables
 	private void startWithPersistentVersion() {
 		 try {
 		      ObjectInputStream inFile = new ObjectInputStream(new FileInputStream("jukeboxSave.ser"));
@@ -176,7 +178,9 @@ public class LoginView extends JPanel implements Serializable {
 		
 	}
 
-
+// Intializes the Table component of the view. This table is composed
+	// of three colums for song tiltle, artist, and length. Songs are
+	// highlighted to select that song
 	private void initializeJTable() {
 		model = ourSongs;
 		table = new JTable(model);
@@ -205,7 +209,9 @@ public class LoginView extends JPanel implements Serializable {
 //		song1.setSize(120, 25);
 //		song1.addActionListener(buttonListener);
 	}
-
+// Initializes the JText area that displays the songs that are
+	// currently playing, with the top song in the queue represnting
+	// the song that is being played
 	private void initializeQueuePanel()
 	{
 		
@@ -226,7 +232,8 @@ public class LoginView extends JPanel implements Serializable {
 		queueAreaLabel.setSize(325, 30);
 		this.add(queueAreaLabel);
 	}
-	
+	// This function is used to return the contents of the queue
+	// in a string. This result is used to display the queues contents
 	private String printQueue()
 	{
 		Iterator qIterator = ourQueue.iterator();
@@ -497,7 +504,9 @@ public class LoginView extends JPanel implements Serializable {
 			return result;
 		}
 	}
-
+// This method runs when the user closes the GUI. It asks the user
+	// if they want to saver the state of the collection. If they do
+	// then the appropriate objects are written to a file
 	public int close() {
 		int choice = JOptionPane.showConfirmDialog(null, "Save Jukebox collection");
 		if (choice == 0)
