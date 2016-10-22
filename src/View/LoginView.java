@@ -70,7 +70,7 @@ public class LoginView extends JPanel implements Serializable {
 	private Song secondSong;
 	private Resetter myRest;
 	private Checker myCheck;
-	//private JTextArea queueArea;
+	// private JTextArea queueArea;
 	private JList<String> queueArea;
 	ListModel1<String> stuff;
 	private JLabel queueAreaLabel;
@@ -79,108 +79,98 @@ public class LoginView extends JPanel implements Serializable {
 	private JLabel tableLabel;
 	private JButton playButton;
 
-
-
-	
 	// Constructor that is used to initialize all the instance variables
 	// this includes intializing all the panel components
 	public LoginView(int width, int height, SongLibrary lib, UserDatabase users) {
 		int choice = JOptionPane.showConfirmDialog(null, "Load saved collection");
-	    System.out.println(choice);
-	    if (choice == 0) {
-	       startWithPersistentVersion();
-	       myRest.checkday();
-	       if (curUser != null)
-	       {
-	       status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
-					+ format(curUser.getCredits()));
-	       }
-	       if (!ourQueue.isEmpty())
-	       {
-	    	   EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
-			   SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
-	       }
+		System.out.println(choice);
+		if (choice == 0) {
+			startWithPersistentVersion();
+			myRest.checkday();
+			if (curUser != null) {
+				status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , "
+						+ "Available Credit: " + format(curUser.getCredits()));
+			}
+			if (!ourQueue.isEmpty()) {
+				EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
+				SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
+			}
 
-	       
-	    }
-	    else
-	    {
-	    stuff =  new ListModel1<>();
-		ourUsers = users;
-		ourSongs = lib;
-		userStatus = false;
-		ourQueue = new LinkedList<Song>();
-		myCheck = new Checker();
-		firstSong = ourSongs.getSong("Tada");
-		secondSong = ourSongs.getSong("Space Music");
-		myRest =  myRest.getResetter(users, lib);
-	    }
-	    this.height = height;
+		} else {
+			stuff = new ListModel1<>();
+			ourUsers = users;
+			ourSongs = lib;
+			userStatus = false;
+			ourQueue = new LinkedList<Song>();
+			myCheck = new Checker();
+			firstSong = ourSongs.getSong("Tada");
+			secondSong = ourSongs.getSong("Space Music");
+			myRest = myRest.getResetter(users, lib);
+		}
+		this.height = height;
 		this.width = width;
 		myCheck = new Checker();
 		initializeJTextAreaPanel();
 		initializeQueuePanel();
 		initializeJTable();
 	}
-	
 
 	// Formats the time in seconds that is sent to it, and
-		// returns the amount of time in a string representing
-		// hours, minutes, and seconds
-		private String format(int credits) {
-			int hours = credits / 3600;
-			String sHours = new String("");
-			if (hours < 10) {
-				sHours = "0" + hours;
-			} else {
-				sHours = "" + hours;
-			}
-			int minutes = credits % 3600;
-			int minutesForS = minutes;
-			minutes = minutes / 60;
-
-			String sMinutes;
-			if (minutes < 10) {
-				sMinutes = "0" + minutes;
-			} else {
-				sMinutes = "" + minutes;
-			}
-			int sec = minutesForS % 60;
-
-			String sSeconds = new String();
-			if (sec < 10) {
-				sSeconds = "0" + sec;
-			} else {
-				sSeconds = "" + sec;
-			}
-			String result = sHours + ":" + sMinutes + ":" + sSeconds;
-			return result;
+	// returns the amount of time in a string representing
+	// hours, minutes, and seconds
+	private String format(int credits) {
+		int hours = credits / 3600;
+		String sHours = new String("");
+		if (hours < 10) {
+			sHours = "0" + hours;
+		} else {
+			sHours = "" + hours;
 		}
-	
+		int minutes = credits % 3600;
+		int minutesForS = minutes;
+		minutes = minutes / 60;
 
-// If starting with a saved version is selected then this function runs to
+		String sMinutes;
+		if (minutes < 10) {
+			sMinutes = "0" + minutes;
+		} else {
+			sMinutes = "" + minutes;
+		}
+		int sec = minutesForS % 60;
+
+		String sSeconds = new String();
+		if (sec < 10) {
+			sSeconds = "0" + sec;
+		} else {
+			sSeconds = "" + sec;
+		}
+		String result = sHours + ":" + sMinutes + ":" + sSeconds;
+		return result;
+	}
+
+	// If starting with a saved version is selected then this function runs to
 	// read
 	// in the contents of that file to the selected variables
 	private void startWithPersistentVersion() {
-		 try {
-		      ObjectInputStream inFile = new ObjectInputStream(new FileInputStream("jukeboxSave.ser"));
-		      ourUsers = (UserDatabase) inFile.readObject();
-		      ourSongs = (SongLibrary) inFile.readObject();
-		      curUser = (User) inFile.readObject();
-		      ourQueue = (Queue<Song>) inFile.readObject();
-		      userStatus = (boolean) inFile.readObject();
-		      myRest = (Resetter) inFile.readObject();
-		      stuff = (ListModel1) inFile.readObject();
-		      inFile.close();
-		    } catch (IOException e) {
-		      e.printStackTrace();
-		    } catch (ClassNotFoundException e) {
-		      e.printStackTrace();
-		    }
-		
+		try {
+			ObjectInputStream inFile = new ObjectInputStream(new FileInputStream("jukeboxSave.ser"));
+			ourUsers = (UserDatabase) inFile.readObject();
+			ourSongs = (SongLibrary) inFile.readObject();
+			curUser = (User) inFile.readObject();
+			ourQueue = (Queue<Song>) inFile.readObject();
+			userStatus = (boolean) inFile.readObject();
+			myRest = (Resetter) inFile.readObject();
+			stuff = (ListModel1) inFile.readObject();
+			inFile.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-// Intializes the Table component of the view. This table is composed
+	// Intializes the Table component of the view. This table is composed
 	// of three colums for song tiltle, artist, and length. Songs are
 	// highlighted to select that song
 	private void initializeJTable() {
@@ -202,51 +192,47 @@ public class LoginView extends JPanel implements Serializable {
 		playButton.setLocation(350, 120);
 		playButton.setSize(65, 30);
 		playButton.addActionListener(buttonListener);
-				
-				
-				
-//		song1 = new JButton("Select Song 1");
-//		this.add(song1);
-//		song1.setLocation(500, 20);
-//		song1.setSize(120, 25);
-//		song1.addActionListener(buttonListener);
+
+		// song1 = new JButton("Select Song 1");
+		// this.add(song1);
+		// song1.setLocation(500, 20);
+		// song1.setSize(120, 25);
+		// song1.addActionListener(buttonListener);
 	}
-// Initializes the JText area that displays the songs that are
+
+	// Initializes the JText area that displays the songs that are
 	// currently playing, with the top song in the queue represnting
 	// the song that is being played
-	private void initializeQueuePanel()
-	{
-		
-		//Font myFont = new Font("Courier", Font.BOLD, 36);
-		//queueArea = new JTextArea("");
+	private void initializeQueuePanel() {
+
+		// Font myFont = new Font("Courier", Font.BOLD, 36);
+		// queueArea = new JTextArea("");
 		queueArea = new JList(stuff);
 		queueArea.setLocation(15, 40);
 		queueArea.setSize(325, 350);
 		this.add(queueArea);
-		if (ourQueue != null && !ourQueue.isEmpty())
-		{
-			//queueArea.setText(printQueue());
-			//stuff.addElement(printQueue());
+		if (ourQueue != null && !ourQueue.isEmpty()) {
+			// queueArea.setText(printQueue());
+			// stuff.addElement(printQueue());
 		}
-		
+
 		queueAreaLabel = new JLabel("Play List (Song at the top is currently playing)");
 		queueAreaLabel.setLocation(15, 10);
 		queueAreaLabel.setSize(325, 30);
 		this.add(queueAreaLabel);
 	}
+
 	// This function is used to return the contents of the queue
 	// in a string. This result is used to display the queues contents
-	private String printQueue()
-	{
+	private String printQueue() {
 		Iterator qIterator = ourQueue.iterator();
 		String result = "";
-		while (qIterator.hasNext())
-		{
+		while (qIterator.hasNext()) {
 			Song temp = (Song) qIterator.next();
 			result += temp.getname() + " by " + temp.getartist() + " is " + temp.gettime() + " seconds\n";
- 		}
+		}
 		return result;
-		
+
 	}
 
 	// This function is used to initialize the JPanel.
@@ -289,7 +275,6 @@ public class LoginView extends JPanel implements Serializable {
 		signOut.setSize(120, 40);
 		signOut.addActionListener(buttonListener1);
 
-		
 		textAreaPanel.add(status);
 		status.setLocation(25, 150);
 		status.setSize(300, 30);
@@ -302,19 +287,19 @@ public class LoginView extends JPanel implements Serializable {
 		textAreaPanel.setLocation(15, 400);
 		textAreaPanel.setSize(325, 200);
 
-//		ButtonListener buttonListener = new ButtonListener();
-//		song1 = new JButton("Select Song 1");
-//		this.add(song1);
-//		song1.setLocation(500, 20);
-//		song1.setSize(120, 25);
-//		song1.addActionListener(buttonListener);
-//
-//		song2 = new JButton("Select Song 2");
-//		this.add(song2);
-//		song2.setLocation(500, 55);
-//		song2.setSize(120, 25);
-//		this.setBackground(Color.PINK);
-//		song2.addActionListener(buttonListener);
+		// ButtonListener buttonListener = new ButtonListener();
+		// song1 = new JButton("Select Song 1");
+		// this.add(song1);
+		// song1.setLocation(500, 20);
+		// song1.setSize(120, 25);
+		// song1.addActionListener(buttonListener);
+		//
+		// song2 = new JButton("Select Song 2");
+		// this.add(song2);
+		// song2.setLocation(500, 55);
+		// song2.setSize(120, 25);
+		// this.setBackground(Color.PINK);
+		// song2.addActionListener(buttonListener);
 		this.setBackground(Color.PINK);
 
 	}
@@ -329,13 +314,13 @@ public class LoginView extends JPanel implements Serializable {
 		// Utilizes a queue to do this
 		public void songFinishedPlaying(EndOfSongEvent eosEvent) {
 			ourQueue.remove();
-			//queueArea.setText(printQueue());
+			// queueArea.setText(printQueue());
 			stuff.remove(0);
 			if (!ourQueue.isEmpty()) {
 				EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 				SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
 			}
-			
+
 		}
 	}
 
@@ -391,7 +376,6 @@ public class LoginView extends JPanel implements Serializable {
 				int selectedRow = table.convertRowIndexToModel(table.getSelectedRow());
 				String songName = (String) model.getValueAt(selectedRow, 0);
 				songSelected = ourSongs.getSong(songName);
-				
 
 				myRest.checkday();
 				int checkValue = myCheck.check(curUser, songSelected);
@@ -407,18 +391,18 @@ public class LoginView extends JPanel implements Serializable {
 					curUser.minusCount();
 					songSelected.play();
 					curUser.minusCredits(songSelected.gettime());
-					status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , " + "Available Credit: "
-							+ format(curUser.getCredits()));
+					status.setText(curUser.getname() + ": Available Plays: " + curUser.getCount() + " , "
+							+ "Available Credit: " + format(curUser.getCredits()));
 
 					if (ourQueue.isEmpty()) {
 						ourQueue.add(songSelected);
-						//queueArea.setText(printQueue());
+						// queueArea.setText(printQueue());
 						stuff.addElement(songSelected.toString());
 						EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 						SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
 					} else {
 						ourQueue.add(songSelected);
-						//queueArea.setText(printQueue());
+						// queueArea.setText(printQueue());
 						stuff.addElement(songSelected.toString());
 					}
 
@@ -505,30 +489,30 @@ public class LoginView extends JPanel implements Serializable {
 			return result;
 		}
 	}
-// This method runs when the user closes the GUI. It asks the user
+
+	// This method runs when the user closes the GUI. It asks the user
 	// if they want to saver the state of the collection. If they do
 	// then the appropriate objects are written to a file
 	public int close() {
 		int choice = JOptionPane.showConfirmDialog(null, "Save Jukebox collection");
-		if (choice == 0)
-		{
-		FileOutputStream bytesToDisk = null;
-	    try {
-	      bytesToDisk = new FileOutputStream("jukeboxSave.ser");
-	      ObjectOutputStream outFile = new ObjectOutputStream(bytesToDisk);
-	      outFile.writeObject(ourUsers);
-	      outFile.writeObject(ourSongs);
-	      outFile.writeObject(curUser);
-	      outFile.writeObject(ourQueue);
-	      outFile.writeObject(userStatus);
-	      outFile.writeObject(myRest);
-	      outFile.writeObject(stuff);
-	      outFile.close();
-	   } catch (FileNotFoundException e) {
-	      e.printStackTrace();
-	    } catch (IOException e) {
-	    e.printStackTrace();
-	  }
+		if (choice == 0) {
+			FileOutputStream bytesToDisk = null;
+			try {
+				bytesToDisk = new FileOutputStream("jukeboxSave.ser");
+				ObjectOutputStream outFile = new ObjectOutputStream(bytesToDisk);
+				outFile.writeObject(ourUsers);
+				outFile.writeObject(ourSongs);
+				outFile.writeObject(curUser);
+				outFile.writeObject(ourQueue);
+				outFile.writeObject(userStatus);
+				outFile.writeObject(myRest);
+				outFile.writeObject(stuff);
+				outFile.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
