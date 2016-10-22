@@ -72,7 +72,7 @@ public class LoginView extends JPanel implements Serializable {
 	private Checker myCheck;
 	//private JTextArea queueArea;
 	private JList<String> queueArea;
-	ListModel1<String> stuff = new ListModel1<>();
+	ListModel1<String> stuff;
 	private JLabel queueAreaLabel;
 	private TableModel model;
 	private JTable table;
@@ -105,6 +105,7 @@ public class LoginView extends JPanel implements Serializable {
 	    }
 	    else
 	    {
+	    stuff =  new ListModel1<>();
 		ourUsers = users;
 		ourSongs = lib;
 		userStatus = false;
@@ -169,6 +170,7 @@ public class LoginView extends JPanel implements Serializable {
 		      ourQueue = (Queue<Song>) inFile.readObject();
 		      userStatus = (boolean) inFile.readObject();
 		      myRest = (Resetter) inFile.readObject();
+		      stuff = (ListModel1) inFile.readObject();
 		      inFile.close();
 		    } catch (IOException e) {
 		      e.printStackTrace();
@@ -224,7 +226,7 @@ public class LoginView extends JPanel implements Serializable {
 		if (ourQueue != null && !ourQueue.isEmpty())
 		{
 			//queueArea.setText(printQueue());
-			stuff.addElement(printQueue());
+			//stuff.addElement(printQueue());
 		}
 		
 		queueAreaLabel = new JLabel("Play List (Song at the top is currently playing)");
@@ -329,7 +331,6 @@ public class LoginView extends JPanel implements Serializable {
 			ourQueue.remove();
 			//queueArea.setText(printQueue());
 			stuff.remove(0);
-			stuff.addElement(printQueue());
 			if (!ourQueue.isEmpty()) {
 				EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 				SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
@@ -412,13 +413,13 @@ public class LoginView extends JPanel implements Serializable {
 					if (ourQueue.isEmpty()) {
 						ourQueue.add(songSelected);
 						//queueArea.setText(printQueue());
-						stuff.addElement(printQueue());
+						stuff.addElement(songSelected.toString());
 						EndOfSongListener waitForSongEnd = new WaitingForSongToEnd();
 						SongPlayer.playFile(waitForSongEnd, ourQueue.peek().getlocation());
 					} else {
 						ourQueue.add(songSelected);
 						//queueArea.setText(printQueue());
-						stuff.addElement(printQueue());
+						stuff.addElement(songSelected.toString());
 					}
 
 				}
@@ -521,6 +522,7 @@ public class LoginView extends JPanel implements Serializable {
 	      outFile.writeObject(ourQueue);
 	      outFile.writeObject(userStatus);
 	      outFile.writeObject(myRest);
+	      outFile.writeObject(stuff);
 	      outFile.close();
 	   } catch (FileNotFoundException e) {
 	      e.printStackTrace();
